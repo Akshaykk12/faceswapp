@@ -1,0 +1,13 @@
+{% if error %}
+<p>{{ error }}</p>
+{% else %}
+<div class="center">
+    <h2>Swapped Face Result</h2>
+    {% load custom_filters %}
+
+<img src="data:image/jpeg;base64,{{ swapped_image_file.read|base64encode }}">
+
+
+
+</div>
+{% endif %}

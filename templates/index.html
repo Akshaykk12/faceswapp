@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Swapper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn {
+            margin-top: 10px;
+        }
+        .result-image {
+            max-width: 100%; /* Responsive width */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Center block */
+            margin: 20px auto; /* Center alignment */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Face Swapper</h1>
+        <p class="text-center">Upload two images for face swapping:</p>
+
+        <form action="{% url 'face_swap' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="poster">Choose a Poster Image:</label>
+                <input type="file" class="form-control-file" id="poster" name="poster" required>
+            </div>
+            <div class="form-group">
+                <label for="facial">Choose a Facial Image:</label>
+                <input type="file" class="form-control-file" id="facial" name="facial" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Generate Face Swap</button>
+        </form>
+
+        {% if result_image %}
+        <h2 class="text-center">Result</h2>
+        <img src="{{ result_image }}" alt="Face Swapped Image" class="result-image">
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
